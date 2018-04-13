@@ -1,0 +1,171 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ 	http://www.springframework.org/schema/mvc
+ 	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+ 	http://www.springframework.org/schema/context
+ 	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ 	http://www.springframework.org/schema/tx 
+ 	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+ 	http://www.springframework.org/schema/security 
+ 	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:component-scan base-package="com.pr.website.*" />
+
+	<!-- <context:annotation-config /> -->
+
+	<!-- Loading the root applicationContext. The .properties file within applicationContext.xml 
+		file will load all the required external properties -->
+	<import resource="/applicationContext.xml" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix">
+			<value>/WEB-INF/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/**" location="/" cache-period="2592000" />
+	<mvc:resources mapping="/libraries/**" location="/libraries/"
+		cache-period="2592000" />
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="2592000" />
+	<mvc:resources mapping="/app/**" location="/app/"
+		cache-period="0" />
+
+	<mvc:annotation-driven />
+
+	<bean id="springController"
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000" />
+	</bean>
+
+	<!-- For the main index page, static resources and /status endpoint that 
+		do not need security configurations -->
+	<security:http pattern="/" security="none" />
+	<security:http pattern="/libraries/**" security="none" />
+	<security:http pattern="/resources/**" security="none" />
+	<security:http pattern="/index/**" security="none" />
+	<security:http pattern="/home/**" security="none" />
+	<security:http pattern="/api/**" security="none" />
+	<security:http pattern="/subscribe/" security="none" />
+	<security:http pattern="/subscribe/**" security="none" />
+	<!-- <security:http pattern="/register/**" security="none" /> <security:http 
+		pattern="/signup/**" security="none" /> -->
+
+	<security:http auto-config="false"
+		entry-point-ref="loginUrlAuthenticationEntryPoint">
+
+		<!-- For the API Gateway endpoints. (Endpoints starting with api/*) -->
+		<!-- <security:intercept-url pattern="/api/**" access="permitAll" /> -->
+
+		<!-- For the Register endpoint and all the sub register links. (Endpoints 
+			starting with register/*) -->
+		<security:intercept-url pattern="/register/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/signup/**"
+			access="permitAll" />
+
+		<!-- For the login endpoints and all its sub endpoints. (Endpoints satrting 
+			with login/*) -->
+		<security:intercept-url pattern="/login/**"
+			access="permitAll" />
+		<security:intercept-url pattern="/logout/**"
+			access="permitAll" />
+
+		<!-- For all the admin endpoints and its sub endpoints. (Endpoints starting 
+			with admin/**) -->
+		<security:intercept-url pattern="/admin/**"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/player/**"
+			access="hasRole('ROLE_PLAYER')" />
+		<security:intercept-url pattern="/club/**"
+			access="hasRole('ROLE_CLUB')" />
+		<security:intercept-url pattern="/coach/**"
+			access="hasRole('ROLE_COACH')" />
+
+		<!-- for all the common endpoints for all kinds of users -->
+		<security:intercept-url pattern="/auth/**"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER','ROLE_CLUB','ROLE_COACH')" />
+		<security:intercept-url pattern="/checkin/**"
+			access="hasAnyRole('ROLE_ADMIN','ROLE_PLAYER','ROLE_CLUB','ROLE_COACH', 'ROLE_ANONYMOUS')" />
+
+		<!-- for the subscription endpoint to allow anonymous access -->
+		<!-- <security:intercept-url pattern="/subscribe/**" access="hasRole('ROLE_ANONYMOUS')" 
+			/> -->
+
+		<security:csrf token-repository-ref="csrfTokenRepository" />
+
+		<security:access-denied-handler
+			error-page="/403" />
+
+		<security:logout logout-url="/logout" delete-cookies="JSESSIONID"
+			invalidate-session="false" success-handler-ref="logoutSuccessHandler" />
+
+		<security:session-management
+			invalid-session-strategy-ref="invalidSessionProvider"
+			session-fixation-protection="migrateSession">
+
+			<security:concurrency-control
+				max-sessions="2" />
+
+		</security:session-management>
+
+		<security:custom-filter ref="loginAuthenticationFilter"
+			position="FORM_LOGIN_FILTER" />
+
+	</security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			ref="loginAuthProvider">
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean id="loginUrlAuthenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<constructor-arg name="loginFormUrl" value="/login"></constructor-arg>
+	</bean>
+
+	<bean id="loginAuthenticationFilter" class="com.pr.website.filters.LoginAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="authenticationFailureHandler" ref="authFailureHandler" />
+		<property name="authenticationSuccessHandler" ref="authSuccessHandler" />
+		<property name="usernameParameter" value="txtEmail"></property>
+		<property name="passwordParameter" value="txtPassword"></property>
+	</bean>
+
+	<bean id="loginAuthProvider" class="com.pr.website.providers.LoginAuthProvider">
+		<property name="validator" ref="validator"></property>
+	</bean>
+	<bean id="authSuccessHandler" class="com.pr.website.handlers.AuthSuccessHandler">
+	</bean>
+	<bean id="authFailureHandler" class="com.pr.website.handlers.AuthFailureHandler">
+	</bean>
+	<bean id="logoutSuccessHandler" class="com.pr.website.handlers.LogoutSuccessHandler">
+	</bean>
+
+	<bean id="sessionProvider" class="com.pr.website.providers.SessionProvider"></bean>
+	<bean id="invalidSessionProvider" class="com.pr.website.providers.InvalidSessionProvider"></bean>
+
+	<bean id="csrfTokenRepository"
+		class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository">
+		<property name="headerName" value="X-XSRF-TOKEN" />
+	</bean>
+
+</beans>

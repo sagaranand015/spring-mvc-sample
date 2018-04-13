@@ -1,0 +1,101 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Premier-Recruits</display-name>
+
+	<!-- Creates the Spring Container shared by all Servlets and Filters - which 
+		is basically the rootContext of all the servlet, defined in applicationContext.xml -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- This is defining the servlet with private context - which is defined 
+		in spring-servlet.xml (The location of the file spring-servlet.xml is defined 
+		below) -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- For configuring the spring-security context for Security configuration -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring-servlet.xml
+		</param-value>
+	</context-param> 
+	
+	<!-- For the multiPartResolver - Uploading the files -->
+	<filter>
+		<display-name>springMultipartFilter</display-name>
+		<filter-name>springMultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springMultipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Defining the SpringSecurity Filter for Security Aspects -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Defining the filter for filtering all the HTTP Requests that comes 
+		in -->
+	<!-- <filter>
+		<filter-name>authFilter</filter-name>
+		<filter-class>com.pr.website.filters.ControllerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+	<filter>
+	    <filter-name>csrfFilter</filter-name>
+	    <filter-class>com.pr.website.filters.CsrfRequestFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>csrfFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- servlet mapping to /* - This means one servlet(by the name of dispatcher) 
+		for managing all the URLs in this webapp\ -->
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- For the Concurrent Session management in Spring -->
+	<listener>
+	    <listener-class>
+	      org.springframework.security.web.session.HttpSessionEventPublisher
+	    </listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+
+	<!-- Hiding the session ID in the URL using the cookie as a tracking mode -->
+	<session-config>
+		<session-timeout>120</session-timeout>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+
+	<!-- For the 400/500 Error Pages -->
+	<!-- <error-page>
+		<location>/error</location>
+	</error-page> -->
+
+</web-app>

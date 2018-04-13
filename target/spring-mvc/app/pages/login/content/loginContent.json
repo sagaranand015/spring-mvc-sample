@@ -1,0 +1,86 @@
+{
+	"headerMenu": {
+		"enabled": true,
+		"menu": [
+			{
+				"enabled": true,
+				"text": "HOME",
+				"link": "",
+				"scrollLink": "#"
+			},
+			{
+				"enabled": true,
+				"text": "LOGIN",
+				"link": "login/player",
+				"scrollLink": "#",
+				"submenu": {
+					"enabled": true,
+					"list": [
+						{
+							"text": "CLUB",
+							"link": "login/club",
+							"scrollLink": "#"
+						},
+						{
+							"text": "COACH",
+							"link": "login/coach",
+							"scrollLink": "#"
+						},
+						{
+							"text": "PLAYER",
+							"link": "login/player",
+							"scrollLink": "#"
+						}
+					]
+				}
+			},
+			{
+				"enabled": true,
+				"text": "REGISTER",
+				"link": "register/player",
+				"scrollLink": "#",
+				"submenu": {
+					"enabled": true,
+					"list": [
+						{
+							"text": "CLUB",
+							"link": "register/club",
+							"scrollLink": "#"
+						},
+						{
+							"text": "COACH",
+							"link": "register/coach",
+							"scrollLink": "#"
+						},
+						{
+							"text": "PLAYER",
+							"link": "register/player",
+							"scrollLink": "#"
+						}
+					]
+				}
+			}
+		],
+		"social": [
+			{
+				"enabled": true,
+				"class": "fa fa-facebook-official fa-2x",
+				"link": "https://www.facebook.com/premierrecruits/",
+				"scrollLink": "#"
+			},
+			{
+				"enabled": true,
+				"class": "fa fa-instagram fa-2x",
+				"link": "https://www.instagram.com/premier_recruits/",
+				"scrollLink": "#"
+			}
+		]
+	},
+	"login": {
+		"enabled": true,
+		"headline": "Login to Premier Recruits"
+	},
+	"footer": {
+		"enabled": true
+	}
+}

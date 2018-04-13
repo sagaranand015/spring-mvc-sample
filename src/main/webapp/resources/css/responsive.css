@@ -1,0 +1,83 @@
+   
+/*
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+[ RESPONSIVE STYLESHEET ]
+AUTHOR : VIJAYAN PP
+PROJECT : Nim
+VERSION : 1.1
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+
+
+/*......................................................
+	DESKTOP LAYOUT
+........................................................*/
+@media only screen and (max-width: 900px){
+    .ramsh-menu ul li:last-child::after{
+        display:none;
+    }
+    
+}
+
+
+/*......................................................
+	MOBILE LAYOUT
+........................................................*/
+
+
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+	.form-login {
+		margin-top: 20%;
+	}
+
+	.navbar-main {
+		background: rgb(0, 0, 0);
+	}
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+	.form-login {
+		margin-top: 20%;
+	}
+
+	.navbar-main {
+		background: rgb(0, 0, 0);
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	.form-login {
+		margin-top: 40%;
+	}
+
+	.navbar-main {
+		background: rgb(0, 0, 0);
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+	.form-login {
+		margin-top: 20%;
+	}
+
+	.navbar-main {
+		background: inherit;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	.form-login {
+		margin-top: 10%;
+	}
+
+	.navbar-main {
+		background: inherit;
+	}
+}
+

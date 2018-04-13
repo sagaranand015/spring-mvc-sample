@@ -1,0 +1,32 @@
+{
+	"heading": "Player Profile",
+	"subHeading": "",
+	"sections": [
+		{
+			"enabled": true,
+			"title": "Update your Profile",
+			"boxes": [
+				{
+					"enabled": false,
+					"id": "",
+					"text": "",
+					"subText": "",
+					"image": "resources/images/avatar.jpg"
+				}
+			]
+		},
+		{
+			"enabled": true,
+			"title": "Update your Profile",
+			"boxes": [
+				{
+					"enabled": false,
+					"id": "",
+					"text": "",
+					"subText": "",
+					"image": "resources/images/avatar.jpg"
+				}
+			]
+		}
+	]
+}

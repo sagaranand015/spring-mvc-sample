@@ -1,0 +1,106 @@
+{
+	"headerMenu": {
+		"enabled": true,
+		"menu": [
+			{
+				"enabled": true,
+				"text": "HOME",
+				"link": "#",
+				"scrollLink": "home"
+			},
+			{
+				"enabled": true,
+				"text": "ABOUT US",
+				"link": "#",
+				"scrollLink": "aboutus"
+			},
+			{
+				"enabled": true,
+				"text": "REGISTER",
+				"link": "#",
+				"scrollLink": "#",
+				"submenu": {
+					"enabled": true,
+					"list": [
+						{
+							"text": "CLUB",
+							"link": "register/club",
+							"scrollLink": "#"
+						},
+						{
+							"text": "COACH",
+							"link": "register/coach",
+							"scrollLink": "#"
+						},
+						{
+							"text": "PLAYER",
+							"link": "register/player",
+							"scrollLink": "#"
+						}
+					]
+				}
+			},
+			{
+				"enabled": true,
+				"text": "LOGIN",
+				"link": "#",
+				"scrollLink": "#",
+				"submenu": {
+					"enabled": true,
+					"list": [
+						{
+							"text": "CLUB",
+							"link": "login/club",
+							"scrollLink": "#"
+						},
+						{
+							"text": "COACH",
+							"link": "login/coach",
+							"scrollLink": "#"
+						},
+						{
+							"text": "PLAYER",
+							"link": "login/player",
+							"scrollLink": "#"
+						}
+					]
+				}
+			},
+			{
+				"enabled": true,
+				"text": "CONTACT US",
+				"link": "#",
+				"scrollLink": "contactus"
+			}
+		],
+		"social": [
+			{
+				"enabled": true,
+				"class": "fa fa-facebook-official fa-2x",
+				"link": "https://www.facebook.com/premierrecruits/",
+				"scrollLink": "#"
+			},
+			{
+				"enabled": true,
+				"class": "fa fa-instagram fa-2x",
+				"link": "https://www.instagram.com/premier_recruits/",
+				"scrollLink": "#"
+			}
+		]
+	},
+	"mainHeader": {
+		"enabled": true
+	},
+	"about": {
+		"enabled": true
+	},
+	"headline": {
+		"enabled": true
+	},
+	"howitworks": {
+		"enabled": true
+	},
+	"contact": {
+		"enabled": true
+	}
+}
