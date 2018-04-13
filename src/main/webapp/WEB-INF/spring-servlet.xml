@@ -63,10 +63,6 @@
 	<security:http pattern="/index/**" security="none" />
 	<security:http pattern="/home/**" security="none" />
 	<security:http pattern="/api/**" security="none" />
-	<security:http pattern="/subscribe/" security="none" />
-	<security:http pattern="/subscribe/**" security="none" />
-	<!-- <security:http pattern="/register/**" security="none" /> <security:http 
-		pattern="/signup/**" security="none" /> -->
 
 	<security:http auto-config="false"
 		entry-point-ref="loginUrlAuthenticationEntryPoint">

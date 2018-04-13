@@ -20,7 +20,6 @@
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/utilities/Utilities.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/constants/UserMessages.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/dao/GenericDao.java
-/Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/helpers/TokenHelperImpl.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/constants/ErrorCodes.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/exceptions/NoSuchUserException.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/providers/InvalidSessionProvider.java
@@ -28,7 +27,6 @@
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/exceptions/DalException.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/dao/UtilitiesDao.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/services/ApiServiceImpl.java
-/Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/helpers/TokenHelper.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/constants/SuccessMessages.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/exceptions/AuthenticationException.java
 /Users/sagaranand/Documents/workspace-spring/open-source/spring-mvc-sample/src/main/java/com/pr/website/constants/Constants.java

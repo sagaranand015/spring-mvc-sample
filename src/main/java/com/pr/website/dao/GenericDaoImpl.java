@@ -24,38 +24,38 @@ public class GenericDaoImpl implements GenericDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(GenericDaoImpl.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	/**
-	 * Checks the connection with the database and returns the boolean
-	 */
-	@Transactional
-	public boolean getDbStatus() throws DalException {
-		try {
-			Session session = this.sessionFactory.getCurrentSession();
-			Query query = session.createNativeQuery("show tables");
-			if (!query.getResultList().isEmpty()) {
-				return true;
-			}
-		} catch (CannotCreateTransactionException e) {
-			logger.error(e.getMessage(), e);
-			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
-		} catch (HibernateException e) {
-			logger.error(e.getMessage(), e);
-			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
-		} catch (PersistenceException e) {
-			logger.error(e.getMessage(), e);
-			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
-		}
-		return false;
-	}
+//	@Autowired
+//	private SessionFactory sessionFactory;
+//
+//	public void setSessionFactory(SessionFactory sessionFactory) {
+//		this.sessionFactory = sessionFactory;
+//	}
+//
+//	/**
+//	 * Checks the connection with the database and returns the boolean
+//	 */
+//	@Transactional
+//	public boolean getDbStatus() throws DalException {
+//		try {
+//			Session session = this.sessionFactory.getCurrentSession();
+//			Query query = session.createNativeQuery("show tables");
+//			if (!query.getResultList().isEmpty()) {
+//				return true;
+//			}
+//		} catch (CannotCreateTransactionException e) {
+//			logger.error(e.getMessage(), e);
+//			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+//		} catch (HibernateException e) {
+//			logger.error(e.getMessage(), e);
+//			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+//		} catch (PersistenceException e) {
+//			logger.error(e.getMessage(), e);
+//			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+//		} catch (Exception e) {
+//			logger.error(e.getMessage(), e);
+//			throw new DalException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
+//		}
+//		return false;
+//	}
 
 }

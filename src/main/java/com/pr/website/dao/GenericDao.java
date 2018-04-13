@@ -4,6 +4,6 @@ import com.pr.website.exceptions.DalException;
 
 public interface GenericDao {
 
-	public boolean getDbStatus() throws DalException;
+	// public boolean getDbStatus() throws DalException;
 
 }

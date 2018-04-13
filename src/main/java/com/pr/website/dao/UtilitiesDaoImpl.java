@@ -19,11 +19,11 @@ public class UtilitiesDaoImpl implements UtilitiesDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(UtilitiesDaoImpl.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+//	@Autowired
+//	private SessionFactory sessionFactory;
+//
+//	public void setSessionFactory(SessionFactory sessionFactory) {
+//		this.sessionFactory = sessionFactory;
+//	}
 
 }

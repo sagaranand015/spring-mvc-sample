@@ -1,6 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
  	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
  	http://www.springframework.org/schema/mvc
@@ -10,114 +12,94 @@
  	http://www.springframework.org/schema/tx 
  	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-	<context:component-scan base-package="com.pr.website.*" />
+	<context:component-scan
+		base-package="com.pr.website.*" />
 
 	<mvc:annotation-driven />
 
-	<context:property-placeholder
-		location="file:/opt/premierrecruits/app.properties,file:/opt/premierrecruits/database.properties,file:/opt/premierrecruits/payment.properties" />
+	<!-- <context:property-placeholder location="file:/opt/premierrecruits/app.properties,file:/opt/premierrecruits/database.properties,file:/opt/premierrecruits/payment.properties" 
+		/> -->
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${app.db.driver}" />
-		<property name="url" value="${app.db.url}" />
-		<property name="username" value="${app.db.username}" />
-		<property name="password" value="${app.db.password}" />
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>com.pr.website.orm.Player</value>
-				<value>com.pr.website.models.UserModel</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${app.hibernate.dialect}</prop>
-			</props>
-		</property>
-	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
-
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="${app.db.driver}" 
+		/> <property name="url" value="${app.db.url}" /> <property name="username" 
+		value="${app.db.username}" /> <property name="password" value="${app.db.password}" 
+		/> </bean> <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource" /> <property name="annotatedClasses"> 
+		<list> <value>com.pr.website.orm.Player</value> <value>com.pr.website.models.UserModel</value> 
+		</list> </property> <property name="hibernateProperties"> <props> <prop key="hibernate.dialect">${app.hibernate.dialect}</prop> 
+		</props> </property> </bean> <tx:annotation-driven transaction-manager="transactionManager" 
+		proxy-target-class="true" /> <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"> 
+		<property name="sessionFactory" ref="sessionFactory" /> </bean> -->
 
 	<!-- Controller beans -->
-	<bean id="clientController" class="com.pr.website.controllers.ClientController"></bean>
-	<bean id="userController" class="com.pr.website.controllers.UserController"></bean>
-	<bean id="entitiesController" class="com.pr.website.controllers.EntitiesController"></bean>
-	<bean id="profileController" class="com.pr.website.controllers.ProfileController"></bean>
-	<bean id="preferencesController" class="com.pr.website.controllers.PreferencesController"></bean>
-	<bean id="playingPreferencesController" class="com.pr.website.controllers.PlayingPreferencesController"></bean>
-	<bean id="careerController" class="com.pr.website.controllers.CareerController"></bean>
-	<bean id="subscribeController" class="com.pr.website.controllers.SubscribeController"></bean>
+	<!-- <bean id="clientController" class="com.pr.website.controllers.ClientController"></bean> 
+		<bean id="userController" class="com.pr.website.controllers.UserController"></bean> 
+		<bean id="entitiesController" class="com.pr.website.controllers.EntitiesController"></bean> 
+		<bean id="profileController" class="com.pr.website.controllers.ProfileController"></bean> 
+		<bean id="preferencesController" class="com.pr.website.controllers.PreferencesController"></bean> 
+		<bean id="playingPreferencesController" class="com.pr.website.controllers.PlayingPreferencesController"></bean> 
+		<bean id="careerController" class="com.pr.website.controllers.CareerController"></bean> 
+		<bean id="subscribeController" class="com.pr.website.controllers.SubscribeController"></bean> -->
 
 	<!-- Utilities Beans -->
 	<bean id="utilities" class="com.pr.website.utilities.Utilities">
-		<!-- <property name="subscriptionPlans" value="${app.subscription.plans}"></property> -->
 	</bean>
-	<bean id="validator" class="com.pr.website.validations.ValidatorImpl"></bean>
-	<bean id="sanitizer" class="com.pr.website.validations.SanitizerImpl"></bean>
+	<bean id="validator"
+		class="com.pr.website.validations.ValidatorImpl"></bean>
+	<bean id="sanitizer"
+		class="com.pr.website.validations.SanitizerImpl"></bean>
 
 	<!-- Dao Beans -->
 	<bean id="genericDao" class="com.pr.website.dao.GenericDaoImpl"></bean>
-	<bean id="userDao" class="com.pr.website.dao.UserDaoImpl"></bean>
-	<bean id="entitiesDao" class="com.pr.website.dao.EntitiesDaoImpl"></bean>
-	<bean id="profileDao" class="com.pr.website.dao.ProfileDaoImpl"></bean>
-	<bean id="utilitiesDao" class="com.pr.website.dao.UtilitiesDaoImpl"></bean>
-	<bean id="preferencesDao" class="com.pr.website.dao.PreferencesDaoImpl"></bean>
-	<bean id="playingPreferencesDao" class="com.pr.website.dao.PlayingPreferencesDaoImpl"></bean>
-	<bean id="careerDao" class="com.pr.website.dao.CareerDaoImpl"></bean>
+	<!-- <bean id="userDao" class="com.pr.website.dao.UserDaoImpl"></bean> <bean 
+		id="entitiesDao" class="com.pr.website.dao.EntitiesDaoImpl"></bean> <bean 
+		id="profileDao" class="com.pr.website.dao.ProfileDaoImpl"></bean> <bean id="utilitiesDao" 
+		class="com.pr.website.dao.UtilitiesDaoImpl"></bean> <bean id="preferencesDao" 
+		class="com.pr.website.dao.PreferencesDaoImpl"></bean> <bean id="playingPreferencesDao" 
+		class="com.pr.website.dao.PlayingPreferencesDaoImpl"></bean> <bean id="careerDao" 
+		class="com.pr.website.dao.CareerDaoImpl"></bean> -->
 
 	<!-- Service Layer Bean -->
-	<bean id="apiService" class="com.pr.website.services.ApiServiceImpl"></bean>
-	<bean id="userService" class="com.pr.website.services.UserServiceImpl"></bean>
-	<bean id="entitiesService" class="com.pr.website.services.EntitiesServiceImpl"></bean>
-	<bean id="profileService" class="com.pr.website.services.ProfileServiceImpl"></bean>
-	<bean id="preferencesService" class="com.pr.website.services.PreferencesServiceImpl"></bean>
-	<bean id="playingPreferencesService" class="com.pr.website.services.PlayingPreferencesServiceImpl"></bean>
-	<bean id="careerService" class="com.pr.website.services.CareerServiceImpl"></bean>
+	<bean id="apiService"
+		class="com.pr.website.services.ApiServiceImpl"></bean>
+	<!-- <bean id="userService" class="com.pr.website.services.UserServiceImpl"></bean> 
+		<bean id="entitiesService" class="com.pr.website.services.EntitiesServiceImpl"></bean> 
+		<bean id="profileService" class="com.pr.website.services.ProfileServiceImpl"></bean> 
+		<bean id="preferencesService" class="com.pr.website.services.PreferencesServiceImpl"></bean> 
+		<bean id="playingPreferencesService" class="com.pr.website.services.PlayingPreferencesServiceImpl"></bean> 
+		<bean id="careerService" class="com.pr.website.services.CareerServiceImpl"></bean> -->
 
 	<!-- All Mail Service bean -->
-	<bean id="mailUtilities" class="com.pr.website.mail.MailUtilities">
-		<property name="contactAdminEmail" value="${app.contact.contactAdminEmail}"></property>
-		<property name="contactAdminName" value="${app.contact.contactAdminName}"></property>
-		<property name="genericTemplate" value="${app.mail.genericTemplate}"></property>
-		<property name="confirmEmailTemplate" value="${app.mail.confirmEmailTemplate}"></property>
-		<property name="confirmEmailLink" value="${app.register.confirmEmailLink}"></property>
-		<property name="passwordResetLink" value="${app.password.passwordResetLink}"></property>
-	</bean>
-	<bean id="mail" class="com.pr.website.mail.SendGridMailImpl">
-		<property name="apiKey" value="${app.sendgrid.apiKey}"></property>
-		<property name="fromEmail" value="${app.mail.fromEmail}"></property>
-		<property name="fromName" value="${app.mail.fromName}"></property>
-	</bean>
+	<!-- <bean id="mailUtilities" class="com.pr.website.mail.MailUtilities"> 
+		<property name="contactAdminEmail" value="${app.contact.contactAdminEmail}"></property> 
+		<property name="contactAdminName" value="${app.contact.contactAdminName}"></property> 
+		<property name="genericTemplate" value="${app.mail.genericTemplate}"></property> 
+		<property name="confirmEmailTemplate" value="${app.mail.confirmEmailTemplate}"></property> 
+		<property name="confirmEmailLink" value="${app.register.confirmEmailLink}"></property> 
+		<property name="passwordResetLink" value="${app.password.passwordResetLink}"></property> 
+		</bean> <bean id="mail" class="com.pr.website.mail.SendGridMailImpl"> <property 
+		name="apiKey" value="${app.sendgrid.apiKey}"></property> <property name="fromEmail" 
+		value="${app.mail.fromEmail}"></property> <property name="fromName" value="${app.mail.fromName}"></property> 
+		</bean> -->
 
 	<!-- All Storage functions -->
-	<bean id="storage" class="com.pr.website.storage.LocalStorageImpl">
-		<property name="profileImgStoragePath" value="${app.storage.profileImg}"></property>
-		<property name="defaultProfileImgName" value="${app.storage.defaultProfileImgName}"></property>
-	</bean>
+	<!-- <bean id="storage" class="com.pr.website.storage.LocalStorageImpl"> 
+		<property name="profileImgStoragePath" value="${app.storage.profileImg}"></property> 
+		<property name="defaultProfileImgName" value="${app.storage.defaultProfileImgName}"></property> 
+		</bean> -->
 
 	<!-- All Helper methods -->
-	<bean id="tokenHelper" class="com.pr.website.helpers.TokenHelperImpl">
-		<property name="signKey" value="${app.register.signKey}"></property>
-		<property name="longExpiryMillis" value="${app.register.longExpiryMillis}"></property>
-		<property name="shortExpiryMillis" value="${app.register.shortExpiryMillis}"></property>
-		<property name="tokenIssuer" value="${app.register.tokenIssuer}"></property>
-		<property name="tokenAlgo" value="${app.register.tokenAlgo}"></property>
-	</bean>
+	<!-- <bean id="tokenHelper" class="com.pr.website.helpers.TokenHelperImpl"> 
+		<property name="signKey" value="${app.register.signKey}"></property> <property 
+		name="longExpiryMillis" value="${app.register.longExpiryMillis}"></property> 
+		<property name="shortExpiryMillis" value="${app.register.shortExpiryMillis}"></property> 
+		<property name="tokenIssuer" value="${app.register.tokenIssuer}"></property> 
+		<property name="tokenAlgo" value="${app.register.tokenAlgo}"></property> 
+		</bean> -->
 
 	<!-- All Payment Interfaces and Classes -->
-	<bean id="subscription" class="com.pr.website.payments.StripeSubscriptionImpl">
-		<property name="secretkey" value="${app.stripe.secretkey}"></property>
-	</bean>
+	<!-- <bean id="subscription" class="com.pr.website.payments.StripeSubscriptionImpl"> 
+		<property name="secretkey" value="${app.stripe.secretkey}"></property> </bean> -->
 
 </beans>

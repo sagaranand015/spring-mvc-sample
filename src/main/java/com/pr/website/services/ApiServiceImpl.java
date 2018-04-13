@@ -13,7 +13,6 @@ import com.pr.website.constants.SuccessMessages;
 import com.pr.website.dao.GenericDao;
 import com.pr.website.exceptions.DalException;
 import com.pr.website.exceptions.ServiceException;
-import com.pr.website.helpers.TokenHelper;
 import com.pr.website.payloads.ServiceResponse;
 import com.pr.website.validations.ValidatorImpl;
 
@@ -27,19 +26,17 @@ public class ApiServiceImpl implements ApiService {
 	@Autowired
 	private ValidatorImpl validator;
 
-	@Autowired
-	private TokenHelper tokenHelper;
-
 	/**
 	 * returns the serviceResponse containing the db and site status response
 	 */
 	public ServiceResponse getSiteStatus() throws ServiceException {
 		try {
-			if (!genericDao.getDbStatus()) {
-				throw new ServiceException(ErrorCodes.INTERNAL_SERVER_ERROR, ErrorMessages.DB_FAILURE);
-			}
+			// if (!genericDao.getDbStatus()) {
+			// throw new ServiceException(ErrorCodes.INTERNAL_SERVER_ERROR,
+			// ErrorMessages.DB_FAILURE);
+			// }
 			return new ServiceResponse(SuccessCodes.OK, SuccessMessages.OK);
-		} catch (DalException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			throw new ServiceException(ErrorCodes.INTERNAL_SERVER_ERROR, e.getMessage());
 		}

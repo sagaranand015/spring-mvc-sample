@@ -14,7 +14,6 @@ com/pr/website/storage/LocalStorageImpl.class
 com/pr/website/constants/SuccessCodes.class
 com/pr/website/validations/SanitizerImpl.class
 com/pr/website/dao/UtilitiesDaoImpl.class
-com/pr/website/helpers/TokenHelper.class
 com/pr/website/handlers/AuthFailureHandler.class
 com/pr/website/dao/GenericDaoImpl.class
 com/pr/website/dao/UtilitiesDao.class
@@ -33,7 +32,6 @@ com/pr/website/handlers/AuthSuccessHandler.class
 com/pr/website/constants/SuccessMessages.class
 com/pr/website/exceptions/AuthenticationException.class
 com/pr/website/controllers/ApiController.class
-com/pr/website/helpers/TokenHelperImpl.class
 com/pr/website/providers/LoginAuthProvider.class
 com/pr/website/filters/ControllerFilter.class
 com/pr/website/providers/SessionProvider.class

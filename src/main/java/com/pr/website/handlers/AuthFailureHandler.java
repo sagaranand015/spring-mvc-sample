@@ -32,31 +32,37 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		try {
-			// get the userType from the exception thing
-			String expMessage = exception.getMessage();
-			String userType = expMessage.split(":")[0];
-			String message = expMessage.split(":")[1];
-
-			if (!utilities.checkUserType(userType)) {
-				redirectStrategy.sendRedirect(request, response, "/login?status=false");
-			}
-
-			if (message.equals(ErrorMessages.INVALID_CREDENTIALS)) {
-				redirectStrategy.sendRedirect(request, response, "/login/" + userType + "?valid=false");
-			} else if (message.equals(ErrorMessages.DB_FAILURE)) {
-				redirectStrategy.sendRedirect(request, response, "/login/" + userType + "?status=false");
-			} else if (message.equals(ErrorMessages.INTERNAL_SERVER_ERROR)) {
-				redirectStrategy.sendRedirect(request, response, "/login/" + userType + "?status=false");
-			} else if (message.equals(ErrorMessages.REGISTRATION_REQD)) {
-				redirectStrategy.sendRedirect(request, response, "/login/" + userType + "?register=false");
-			} else if (message.equals(ErrorMessages.USER_NOT_APPROVED)) {
-				redirectStrategy.sendRedirect(request, response, "/login/" + userType + "?approved=false");
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			redirectStrategy.sendRedirect(request, response, "/login?status=false");
-		}
+		// "?approved=false");
+		// try {
+		// // get the userType from the exception thing
+		// String expMessage = exception.getMessage();
+		// String userType = expMessage.split(":")[0];
+		// String message = expMessage.split(":")[1];
+		//
+		// if (!utilities.checkUserType(userType)) {
+		// redirectStrategy.sendRedirect(request, response, "/login?status=false");
+		// }
+		//
+		// if (message.equals(ErrorMessages.INVALID_CREDENTIALS)) {
+		// redirectStrategy.sendRedirect(request, response, "/login/" + userType +
+		// "?valid=false");
+		// } else if (message.equals(ErrorMessages.DB_FAILURE)) {
+		// redirectStrategy.sendRedirect(request, response, "/login/" + userType +
+		// "?status=false");
+		// } else if (message.equals(ErrorMessages.INTERNAL_SERVER_ERROR)) {
+		// redirectStrategy.sendRedirect(request, response, "/login/" + userType +
+		// "?status=false");
+		// } else if (message.equals(ErrorMessages.REGISTRATION_REQD)) {
+		// redirectStrategy.sendRedirect(request, response, "/login/" + userType +
+		// "?register=false");
+		// } else if (message.equals(ErrorMessages.USER_NOT_APPROVED)) {
+		// redirectStrategy.sendRedirect(request, response, "/login/" + userType +
+		// "?approved=false");
+		// }
+		// } catch (Exception e) {
+		// logger.error(e.getMessage(), e);
+		// redirectStrategy.sendRedirect(request, response, "/login?status=false");
+		// }
 	}
 
 }

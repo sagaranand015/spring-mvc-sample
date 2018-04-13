@@ -1,7 +1,7 @@
 package com.pr.website.controllers;
 
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,6 @@ import com.pr.website.constants.ErrorMessages;
 import com.pr.website.constants.SuccessCodes;
 import com.pr.website.constants.SuccessMessages;
 import com.pr.website.exceptions.ServiceException;
-import com.pr.website.helpers.TokenHelper;
 import com.pr.website.payloads.ServiceResponse;
 import com.pr.website.services.ApiService;
 import com.pr.website.utilities.Utilities;
@@ -51,6 +50,24 @@ public class ApiController {
 
 	@Autowired
 	private ApiService apiService;
+
+	/**
+	 * @param model
+	 * @return the index/home page for the P-R Website
+	 */
+	@RequestMapping(value = { "/angular" })
+	public String angularPage(Model model) {
+		return "index";
+	}
+
+	/**
+	 * @param model
+	 * @return the index/home page for the P-R Website
+	 */
+	@RequestMapping(value = { "/", "/jquery" })
+	public String jQueryPage(Model model) {
+		return "jquery";
+	}
 
 	/**
 	 * @return for sending back the response for status of the service, including
