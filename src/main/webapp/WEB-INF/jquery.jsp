@@ -110,5 +110,27 @@
 	<script type="text/javascript"
 		src="resources/smarty/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			alert("Calling the API");
+			
+			// calling the API through jQuery
+			$.ajax({
+				method : 'GET',
+				url : 'api/status',
+				success : function(response) {
+					console.log(response);
+					alert("SUCCESS");
+				},
+				error : function(response) {
+					console.log(response);
+					alert("ERROR");
+				}
+			});
+
+		});
+	</script>
+
 </body>
 </html>
